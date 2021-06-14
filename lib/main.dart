@@ -1,54 +1,52 @@
 import 'package:flutter/material.dart';
-import './res/listData.dart' as list;
+import 'pages/tabs/gridviewList.dart';
+import 'pages/tabs/warpList.dart';
+import 'pages/tabs/fulewegit.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    title: 'App',
+    home: MyApp(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  Widget _getList(BuildContext context, int index) {
-    return Card(
-        margin: EdgeInsets.all(10),
-        child: Container(
-          height: 300,
-          child: Column(
-            children: [
-              Expanded(
-                  flex: 2,
-                  child: Image.network(
-                    list.listData[index]["imageUrl"],
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                  )),
-              Expanded(
-                  flex: 1,
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage:
-                          NetworkImage(list.listData[index]["imageUrl"]),
-                    ),
-                    title: Text(list.listData[index]["title"]),
-                    subtitle: Text(
-                      list.listData[index]["description"],
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 4,
-                    ),
-                  ))
-            ],
-          ),
-        ));
-  }
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
 
   @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int index = 0;
+  List<Widget> pages = [GridviewList(), Fulewegit(), WarpList()];
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'app',
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text('我的App'),
-          ),
-          body: ListView.builder(
-              itemCount: list.listData.length, itemBuilder: this._getList)),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('App'),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.white70,
+          type: BottomNavigationBarType.fixed,
+          currentIndex: this.index,
+          onTap: (int index) {
+            setState(() {
+              this.index = index;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: '个人'),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: '设置')
+          ]),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print('点击了悬浮按钮');
+        },
+        child: Icon(Icons.search),
+      ),
+      body: this.pages[this.index],
     );
   }
 }
