@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/index.dart';
 import 'pages/tabs/gridviewList.dart';
 import 'pages/tabs/warpList.dart';
 import 'pages/tabs/fulewegit.dart';
@@ -6,7 +7,8 @@ import 'pages/tabs/fulewegit.dart';
 void main() {
   runApp(MaterialApp(
     title: 'App',
-    home: MyApp(),
+    initialRoute: '/',
+    routes: myRoute,
   ));
 }
 
@@ -30,6 +32,7 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.white70,
           type: BottomNavigationBarType.fixed,
           currentIndex: this.index,
+          selectedItemColor: Color(0xFF3A74F2),
           onTap: (int index) {
             setState(() {
               this.index = index;
