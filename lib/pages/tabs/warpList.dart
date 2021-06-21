@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/nameSpace.dart';
 // import '../serchPage.dart';
@@ -70,7 +68,7 @@ class WarpList extends StatelessWidget {
                   e['url'],
                   fit: BoxFit.cover,
                   width: 130,
-                  height: 130,
+                  // height: 130,
                 ),
               ),
             )))

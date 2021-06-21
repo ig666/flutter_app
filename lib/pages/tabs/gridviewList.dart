@@ -32,7 +32,8 @@ class GridviewList extends StatelessWidget {
                       ),
                       subtitle: ElevatedButton(
                         child: Text('点我'),
-                        onPressed: () => {print('点击')},
+                        onPressed: () =>
+                            {Navigator.pushNamed(context, '/tabspage')},
                       )))
             ],
           ),
