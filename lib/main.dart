@@ -4,7 +4,9 @@ import 'pages/tabs/gridviewList.dart';
 import 'pages/tabs/warpList.dart';
 import 'pages/tabs/fulewegit.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(MaterialApp(
     title: 'App',
     initialRoute: '/',

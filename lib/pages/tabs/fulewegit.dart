@@ -20,7 +20,12 @@ class _FulewegitState extends State<Fulewegit> {
                   this.num++;
                 });
               },
-              child: Text('按钮'))
+              child: Text('按钮')),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/camera');
+              },
+              child: Text('相机页面'))
         ],
       ),
     );
