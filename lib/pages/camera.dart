@@ -4,17 +4,6 @@ import 'package:flutter/material.dart';
 
 // A screen that allows users to take a picture using a given camera.
 class Camera extends StatefulWidget {
-  late final CameraDescription camera;
-  Future<void> _initCamera() async {
-    final cameras = await availableCameras();
-
-    // Get a specific camera from the list of available cameras.
-    final firstCamera = cameras.first;
-    this.camera = firstCamera;
-    print(cameras);
-    print('进入初始化相机');
-  }
-
   @override
   CameraState createState() => CameraState();
 }
@@ -23,74 +12,58 @@ class CameraState extends State<Camera> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
 
-  @override
-  void initState() {
-    super.initState();
-    print('initState函数');
-    // To display the current output from the Camera,
-    // create a CameraController.
+  //获取相机List
+  Future<void> _initCamera() async {
+    final cameras = await availableCameras();
+    final firstCamera = cameras.first;
     this._controller = CameraController(
-      // Get a specific camera from the list of available cameras.
-      widget.camera,
-      // Define the resolution to use.
+      firstCamera,
       ResolutionPreset.medium,
     );
-    // Next, initialize the controller. This returns a Future.
-    this._initializeControllerFuture = this._controller.initialize();
+    await this._controller.initialize();
+  }
+
+  @override
+  void initState() {
+    print('进入初始化函数');
+    super.initState();
+    this._initializeControllerFuture = this._initCamera();
   }
 
   @override
   void dispose() {
-    // Dispose of the controller when the widget is disposed.
-    _controller.dispose();
+    // 销毁相机实例，避免内存泄漏
+    this._controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    print('build函数');
     return Scaffold(
       appBar: AppBar(title: const Text('Take a picture')),
-      // You must wait until the controller is initialized before displaying the
-      // camera preview. Use a FutureBuilder to display a loading spinner until the
-      // controller has finished initializing.
       body: FutureBuilder<void>(
         future: this._initializeControllerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            // If the Future is complete, display the preview.
             return CameraPreview(_controller);
           } else {
-            // Otherwise, display a loading indicator.
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
           }
         },
       ),
       floatingActionButton: FloatingActionButton(
-        // Provide an onPressed callback.
         onPressed: () async {
-          // Take the Picture in a try / catch block. If anything goes wrong,
-          // catch the error.
           try {
-            // Ensure that the camera is initialized.
-            await _initializeControllerFuture;
-
-            // Attempt to take a picture and get the file `image`
-            // where it was saved.
-            final image = await _controller.takePicture();
-
-            // If the picture was taken, display it on a new screen.
+            await this._initializeControllerFuture;
+            final image = await this._controller.takePicture();
             await Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => DisplayPictureScreen(
-                  // Pass the automatically generated path to
-                  // the DisplayPictureScreen widget.
                   imagePath: image.path,
                 ),
               ),
             );
           } catch (e) {
-            // If an error occurs, log the error to the console.
             print(e);
           }
         },
