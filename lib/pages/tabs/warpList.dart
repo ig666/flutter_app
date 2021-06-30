@@ -4,7 +4,7 @@ import 'package:flutter_app/pages/nameSpace.dart';
 
 class WarpList extends StatelessWidget {
   WarpList({Key? key}) : super(key: key);
-  List imageList = [
+  final List imageList = [
     {
       'title': '炭治郎',
       'tag': '1',

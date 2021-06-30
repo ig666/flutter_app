@@ -25,7 +25,6 @@ class CameraState extends State<Camera> {
 
   @override
   void initState() {
-    print('进入初始化函数');
     super.initState();
     this._initializeControllerFuture = this._initCamera();
   }
