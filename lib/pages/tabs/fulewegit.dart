@@ -8,17 +8,16 @@ class Fulewegit extends StatefulWidget {
 
 class _FulewegitState extends State<Fulewegit> {
   int num = 0;
-  late final TextEditingController name;
   @override
   void initState() {
     super.initState();
-    this.name = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
@@ -27,7 +26,6 @@ class _FulewegitState extends State<Fulewegit> {
                   onPressed: () {
                     setState(() {
                       this.num++;
-                      print(this.name.text);
                     });
                   },
                   child: Text('按钮')),
@@ -38,10 +36,35 @@ class _FulewegitState extends State<Fulewegit> {
                   child: Text('相机页面'))
             ],
           ),
-          TextField(
-            controller: this.name,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '12132',
+                style: TextStyle(fontFamily: 'Schyler', fontSize: 20),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Text(
+                '12132',
+                style: TextStyle(fontSize: 20),
+              ),
+            ],
           ),
-          Text(this.name.text)
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.all(16),
+            child: ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Color(0xFF3A74F2))),
+              onPressed: () {
+                Navigator.pushNamed(context, '/addperson');
+              },
+              child: Text('新增客户'),
+            ),
+          )
         ],
       ),
     );
