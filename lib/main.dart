@@ -11,6 +11,9 @@ void main() async {
     title: 'App',
     initialRoute: '/',
     routes: myRoute,
+    theme: ThemeData(
+        inputDecorationTheme: InputDecorationTheme(
+            contentPadding: const EdgeInsets.symmetric(vertical: 4.0))),
   ));
 }
 
