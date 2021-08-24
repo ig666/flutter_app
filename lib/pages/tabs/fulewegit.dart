@@ -24,9 +24,10 @@ class _FulewegitState extends State<Fulewegit> {
               Chip(label: Text('${this.num}')),
               ElevatedButton(
                   onPressed: () {
-                    setState(() {
-                      this.num++;
-                    });
+                    // setState(() {
+                    //   this.num++;
+                    // });
+                    Navigator.pushNamed(context, '/testtouch');
                   },
                   child: Text('按钮')),
               ElevatedButton(

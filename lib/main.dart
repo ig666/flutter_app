@@ -25,7 +25,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int index = 0;
+  int index = 1;
   List<Widget> pages = [GridviewList(), Fulewegit(), WarpList()];
   @override
   Widget build(BuildContext context) {
