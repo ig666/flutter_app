@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/tabs/gestures.dart';
 import 'package:flutter_app/routes/index.dart';
 import 'pages/tabs/gridviewList.dart';
 import 'pages/tabs/warpList.dart';
@@ -25,8 +26,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int index = 1;
-  List<Widget> pages = [GridviewList(), Fulewegit(), WarpList()];
+  int index = 0;
+  List<Widget> pages = [
+    GridviewList(),
+    Fulewegit(),
+    GesturesPage(),
+    WarpList()
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +52,8 @@ class _MyAppState extends State<MyApp> {
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: '个人'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.gesture_rounded), label: '手势页面'),
             BottomNavigationBarItem(icon: Icon(Icons.settings), label: '设置')
           ]),
       floatingActionButton: FloatingActionButton(
