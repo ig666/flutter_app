@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/components/testNotification.dart';
 
 //手势测试页面
 
@@ -50,6 +51,21 @@ class _GesturesPageState extends State<GesturesPage> {
             width: 200,
             height: 200,
             child: BothDirectionTestRoute(),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          NotificationListener<ScrollEndNotification>(
+            onNotification: (notification) {
+              print('${notification.toString()} 父级通知');
+              return false;
+            },
+            child: Container(
+              width: 100,
+              height: 100,
+              color: Colors.cyan[900],
+              child: TestNotification(),
+            ),
           )
         ],
       ),
@@ -84,6 +100,7 @@ class BothDirectionTestRouteState extends State<BothDirectionTestRoute> {
                 _top += details.delta.dy;
               });
             },
+            //水平方向拖动事件
             onHorizontalDragUpdate: (DragUpdateDetails details) {
               setState(() {
                 _left += details.delta.dx;
