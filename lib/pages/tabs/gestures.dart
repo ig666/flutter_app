@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/components/animation.dart';
 import 'package:flutter_app/pages/components/testNotification.dart';
 
 //手势测试页面
@@ -31,42 +32,43 @@ class _GesturesPageState extends State<GesturesPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          GestureDetector(
-            child: Container(
-              child: Text(
-                _type,
-                style: TextStyle(color: Colors.brown),
-              ),
-            ),
-            onDoubleTap: () => changeType('双击'),
-            onTap: () => changeType('单击'),
-            onLongPress: () => changeType('长按'),
-          ),
-          SizedBox(
-            height: 100,
-          ),
-          // _Drag()
-          Container(
-            color: Colors.black,
-            width: 200,
-            height: 200,
-            child: BothDirectionTestRoute(),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          NotificationListener<ScrollEndNotification>(
-            onNotification: (notification) {
-              print('${notification.toString()} 父级通知');
-              return false;
-            },
-            child: Container(
-              width: 100,
-              height: 100,
-              color: Colors.cyan[900],
-              child: TestNotification(),
-            ),
-          )
+          // GestureDetector(
+          //   child: Container(
+          //     child: Text(
+          //       _type,
+          //       style: TextStyle(color: Colors.brown),
+          //     ),
+          //   ),
+          //   onDoubleTap: () => changeType('双击'),
+          //   onTap: () => changeType('单击'),
+          //   onLongPress: () => changeType('长按'),
+          // ),
+          // SizedBox(
+          //   height: 100,
+          // ),
+          // // _Drag()
+          // Container(
+          //   color: Colors.black,
+          //   width: 200,
+          //   height: 200,
+          //   child: BothDirectionTestRoute(),
+          // ),
+          // SizedBox(
+          //   height: 10,
+          // ),
+          // NotificationListener<ScrollEndNotification>(
+          //   onNotification: (notification) {
+          //     print('${notification.toString()} 父级通知');
+          //     return false;
+          //   },
+          //   child: Container(
+          //     width: 100,
+          //     height: 100,
+          //     color: Colors.cyan[900],
+          //     child: TestNotification(),
+          //   ),
+          // ),
+          ScaleAnimationRoute() //动画组件 ps：打开请注释上面兄弟组件，不然要超出页面错误边界
         ],
       ),
     );

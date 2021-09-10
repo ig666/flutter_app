@@ -34,3 +34,11 @@ class TestNotification extends StatelessWidget {
     );
   }
 }
+
+//自定义通知类
+
+class MyNotfication extends Notification {
+  final String msg;
+  MyNotfication(this.msg);
+}
+
